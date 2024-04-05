@@ -1,0 +1,246 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 05-04-2024 a las 16:09:46
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de datos: `examen`
+--
+CREATE DATABASE IF NOT EXISTS `examen` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `examen`;
+
+DELIMITER $$
+--
+-- Procedimientos
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPEnunciados` (IN `$Tipo` CHAR(3), IN `$VidExamen` INT, IN `$VDescripcionEnunciado` VARCHAR(200), IN `$idEnunciado` INT)   begin
+	if $Tipo='Ins' THEN
+		INSERT INTO enunciados(idExamen,DescripcionEnunciado) VALUES ($VidExamen, $VDescripcionEnunciado);   
+SELECT MAX(idEnunciado) As idEnunciado FROM enunciados;
+    END if;
+   	if $Tipo='Sel' THEN
+		SELECT * FROM enunciados WHERE idExamen=$VidExamen;
+    END if ;
+    if $Tipo='Upd' THEN
+		Update enunciados set idExamen=$VidExamen,DescripcionEnunciado=$VDescripcionEnunciado;   
+    END if;
+end$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPExamenes` (IN `$Tipo` CHAR(3), IN `$VidMaestro` INT, IN `$VNombreExamen` CHAR(20), IN `$VCantEnunExamen` INT, IN `$VidExamen` INT)   begin
+	if $Tipo='Ins' THEN
+		INSERT INTO examenes(idMaestro, NombreExamen, FechaCreaExamen, FechaActuExamen, CantEnunExamen) VALUES ($VidMaestro,$VNombreExamen, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(),$VCantEnunExamen);
+SELECT MAX(idExamen) As idExamen FROM examenes;
+    END if;
+   	if $Tipo='Sel' THEN
+		SELECT * FROM examenes;
+    END if ;
+   	if $Tipo='Upd' THEN
+		UPDATE examenes SET NombreExamen=$VNombreExamen,FechaActuExamen=CURRENT_TIMESTAMP() ;
+    END if ;
+    if $Tipo='Del' THEN
+		DELETE FROM examenes WHERE idExamen=$VidExamen;
+    END if ;
+    if $Tipo='Whe' THEN
+		SELECT * FROM examenes WHERE idMaestro=$VidMaestro ORDER BY FechaActuExamen DESC;
+    END if ;
+    if $Tipo='WId' THEN
+		SELECT * FROM examenes WHERE idExamen=$VidExamen;
+    END if ;
+end$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPMaestros` (IN `$Tipo` CHAR(3), IN `$VNombreMaestro` VARCHAR(20))   begin
+	if $Tipo='Ins' THEN
+		INSERT INTO maestros(NombreMaestro) VALUES ($VNombreMaestro); 
+		SELECT * FROM maestros WHERE NombreMaestro=$VNombreMaestro;
+    END if;
+   	if $Tipo='Whe' THEN
+		SELECT * FROM maestros WHERE NombreMaestro=$VNombreMaestro;
+    END if ;
+end$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPRespuestas` (`$Tipo` CHAR(3), `$VidEnunciado` INT, `$VDescripcionRespuesta` VARCHAR(100), `$VCorrectaRespuesta` BIT)   begin
+	if $Tipo='Ins' THEN
+		INSERT INTO respuestas(idEnunciado,DescripcionRespuesta,CorrectaRespuesta) VALUES ($VidEnunciado, $VDescripcionRespuesta, $VCorrectaRespuesta);   
+    END if;
+   	if $Tipo='Sel' THEN
+		SELECT * FROM respuestas WHERE idEnunciado=$VidEnunciado;
+    END if ;
+    if $Tipo='Upd' THEN
+		Update respuestas set idEnunciado=$VidEnunciado,DescripcionRespuesta=$VDescripcionRespuesta,CorrectaRespuesta=$VCorrectaRespuesta;   
+    END if;
+end$$
+
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `enunciados`
+--
+
+CREATE TABLE `enunciados` (
+  `idEnunciado` int(11) NOT NULL,
+  `idExamen` int(11) NOT NULL,
+  `DescripcionEnunciado` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- RELACIONES PARA LA TABLA `enunciados`:
+--   `idExamen`
+--       `examenes` -> `idExamen`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `examenes`
+--
+
+CREATE TABLE `examenes` (
+  `idExamen` int(11) NOT NULL,
+  `idMaestro` int(11) NOT NULL,
+  `NombreExamen` char(20) NOT NULL,
+  `FechaCreaExamen` datetime NOT NULL,
+  `FechaActuExamen` datetime NOT NULL,
+  `CantEnunExamen` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- RELACIONES PARA LA TABLA `examenes`:
+--   `idMaestro`
+--       `maestros` -> `idMaestro`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `maestros`
+--
+
+CREATE TABLE `maestros` (
+  `idMaestro` int(11) NOT NULL,
+  `NombreMaestro` char(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- RELACIONES PARA LA TABLA `maestros`:
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `respuestas`
+--
+
+CREATE TABLE `respuestas` (
+  `idRespuesta` int(11) NOT NULL,
+  `idEnunciado` int(11) NOT NULL,
+  `DescripcionRespuesta` varchar(100) NOT NULL,
+  `CorrectaRespuesta` bit(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- RELACIONES PARA LA TABLA `respuestas`:
+--   `idEnunciado`
+--       `enunciados` -> `idEnunciado`
+--
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `enunciados`
+--
+ALTER TABLE `enunciados`
+  ADD PRIMARY KEY (`idEnunciado`),
+  ADD KEY `idExamen` (`idExamen`);
+
+--
+-- Indices de la tabla `examenes`
+--
+ALTER TABLE `examenes`
+  ADD PRIMARY KEY (`idExamen`),
+  ADD KEY `idMaestro` (`idMaestro`);
+
+--
+-- Indices de la tabla `maestros`
+--
+ALTER TABLE `maestros`
+  ADD PRIMARY KEY (`idMaestro`);
+
+--
+-- Indices de la tabla `respuestas`
+--
+ALTER TABLE `respuestas`
+  ADD PRIMARY KEY (`idRespuesta`),
+  ADD KEY `idEnunciado` (`idEnunciado`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `enunciados`
+--
+ALTER TABLE `enunciados`
+  MODIFY `idEnunciado` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `examenes`
+--
+ALTER TABLE `examenes`
+  MODIFY `idExamen` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `maestros`
+--
+ALTER TABLE `maestros`
+  MODIFY `idMaestro` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `respuestas`
+--
+ALTER TABLE `respuestas`
+  MODIFY `idRespuesta` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `enunciados`
+--
+ALTER TABLE `enunciados`
+  ADD CONSTRAINT `enunciados_ibfk_1` FOREIGN KEY (`idExamen`) REFERENCES `examenes` (`idExamen`);
+
+--
+-- Filtros para la tabla `examenes`
+--
+ALTER TABLE `examenes`
+  ADD CONSTRAINT `examenes_ibfk_1` FOREIGN KEY (`idMaestro`) REFERENCES `maestros` (`idMaestro`);
+
+--
+-- Filtros para la tabla `respuestas`
+--
+ALTER TABLE `respuestas`
+  ADD CONSTRAINT `respuestas_ibfk_1` FOREIGN KEY (`idEnunciado`) REFERENCES `enunciados` (`idEnunciado`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
