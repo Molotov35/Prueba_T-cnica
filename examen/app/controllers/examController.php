@@ -221,10 +221,32 @@
 			exit();
 		}
 
-		public function ResponderExamen($VidExam)
+		public function getExam($VidExam)
 		{
+			$fields =[ #CAMPOS DE REGISTRO DEL QUERY
+	 	 		[
+					"field_name"  =>"idMaestro",
+					"field_mark"  =>":MidMaestro",
+					"field_value" =>""
+	 	 		],
+	 	 		[
+					"field_name"  =>"NombreExamen",
+					"field_mark"  =>":MNombreExamen",
+					"field_value" =>""
+	 	 		],
+	 	 		[
+					"field_name"  =>"CantEnunExam",
+					"field_mark"  =>":MCantEnunExam",
+					"field_value" =>""
+	 	 		],
+	 	 		[
+					"field_name"  =>"idExam",
+					"field_mark"  =>":MidExam",
+					"field_value" =>$VidExam
+	 	 		]
+	 	 	];
 
-	 	 	$DatosExamen=$this->execQue("Select * from examenes ex JOIN enunciados en ON ex.idExamen=en.idExamen JOIN respuestas r on r.idEnunciado=en.idEnunciado where ex.idExamen=".$VidExam);
+			$DatosExamen=$this->queSP("SPExamenes","Get",$fields);
 
 
 	 	 	return $DatosExamen;

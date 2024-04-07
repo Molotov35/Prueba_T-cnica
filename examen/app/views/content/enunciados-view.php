@@ -17,12 +17,7 @@
 	  $Título="<i>".$_SESSION['Maestro']->NombreMaestro."</i>";
 
 	  $examList = $dataExam->Exam($VidExamen);
-	  // echo '<pre>'; print_r($examList); echo '</pre>';
-
-	  
-
-
-
+	  $CantRespPosi = 4;
 }
 
 
@@ -43,39 +38,37 @@
 			<input type="hidden" name="register" value="Ins">
 			<input type="hidden" name="idExam" value="<?php echo $VidExamen; ?>">
 
+
 		<?php for ($i=0; $i <$examList[0]->CantEnunExamen ; $i++) { ?>
 
+		  <div class="accordion-item">
+		    <h2 class="accordion-header">
+		      <button class="accordion-button" type="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="collapseOne">
+		      	<label for="IEnunciado<?php echo $i;  ?>"><?php echo $i+1; ?> </label>
+		        <input type="text" name="IEnunciado<?php echo $i;  ?>" id="IEnunciado<?php echo $i;  ?>" class="form-control">
+		      </button>
+		    </h2>
+		    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+		      <div class="accordion-body">
+						
 
-	  <div class="accordion-item">
-	    <h2 class="accordion-header">
-	      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-	      	<label><?php echo $i+1; ?> </label>
-	        <input type="text" name="IEnunciado<?php echo $i;  ?>" class="form-control">
-	      </button>
-	    </h2>
-	    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-	      <div class="accordion-body">
-	        <div class="form-check">
-			  <input class="form-check-input radioCheckRespuesta" type="radio" name="flexRadioDefault<?php echo $i;  ?>" id="flexRadioDefault" value="<?php echo $i ?>1" checked>
-			  <input type="text" class="inputcheckRespuesta" name="inputcheckRespuesta<?php echo $i ?>1">
-			</div>
-			<div class="form-check">
-			  <input class="form-check-input radioCheckRespuesta" type="radio" name="flexRadioDefault<?php echo $i;  ?>" id="flexRadioDefault2" value="<?php echo $i ?>2">
-			  <input type="text" class="inputcheckRespuesta" name="inputcheckRespuesta<?php echo $i ?>2">
-			</div>
-			<div class="form-check">
-			  <input class="form-check-input radioCheckRespuesta" type="radio" name="flexRadioDefault<?php echo $i;  ?>" id="flexRadioDefault3" value="<?php echo $i ?>3">
-			  <input type="text" class="inputcheckRespuesta" name="inputcheckRespuesta<?php echo $i ?>3">
-			</div>
-			<div class="form-check">
-			  <input class="form-check-input radioCheckRespuesta" type="radio" name="flexRadioDefault<?php echo $i;  ?>" id="flexRadioDefault4" value="<?php echo $i ?>4">
-			  <input type="text" class="inputcheckRespuesta" name="inputcheckRespuesta<?php echo $i ?>4">
-			</div>
-	      </div>
-	    </div>
-	  </div>
+						<?php for ($j=0; $j <$CantRespPosi; $j++) { ?>
+
+			        <div class="form-check">
+							  <input class="form-check-input radioCheckRespuesta" type="radio" name="flexRadioDefault<?php echo $i;?>" id="flexRadioDefault<?php echo $i.$j?>" value="<?php echo $i.$j ?>" checked>
+							  <input type="text" class="inputcheckRespuesta" name="inputcheckRespuesta<?php echo $i.$j?>">
+							</div>
+							
+						<?php } ?>
+
+
+		      </div>
+		    </div>
+		  </div>
 		
 		<?php } ?>
+
+
 		<button type="submit" class="btn btn-primary mr-5">Guardar</button>
 	</form>
 	</div>

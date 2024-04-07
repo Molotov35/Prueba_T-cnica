@@ -12,15 +12,8 @@ if(!isset($_SESSION["Maestro"]->NombreMaestro) || $_SESSION['Maestro']->NombreMa
   $Título="Bienvenido <i>".$_SESSION['Maestro']->NombreMaestro."</i>";
 
   $examList = $dataExam->selExam($_SESSION['Maestro']->idMaestro);
-  // echo '<pre>'; print_r($examList); echo '</pre>';
-  
-
-
 
 }
-
-
-
  ?>
 
 <main>
@@ -50,8 +43,8 @@ if(!isset($_SESSION["Maestro"]->NombreMaestro) || $_SESSION['Maestro']->NombreMa
                 <p class="card-text">Actualizado: <?php echo $exam->FechaActuExamen ?></p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
-                    <a href="<?php echo APP_URL."enunciados/".$exam->idExamen; ?>" class="btn btn-sm btn-outline-secondary">Modificar</a>
-                    <a href="<?php echo APP_URL."Menunciados/".$exam->idExamen; ?>" class="btn btn-sm btn-outline-secondary">Compartir</a>
+                    <a href="<?php echo APP_URL."enunciadosUpd/".$exam->idExamen; ?>" class="btn btn-sm btn-outline-secondary">Modificar</a>
+                    <a href="<?php echo APP_URL."Examen/".$exam->idExamen; ?>" class="btn btn-sm btn-outline-secondary">Compartir</a>
                   </div>
                   <small class="text-body-secondary">X Terminados</small>
                 </div>

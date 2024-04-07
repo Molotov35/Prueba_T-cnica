@@ -16,7 +16,8 @@
 							"selExam",
 							"datExam",
 							"enunciados",
-							"Menunciados"
+							"Examen",
+							"enunciadosUpd"
 						];
 
 

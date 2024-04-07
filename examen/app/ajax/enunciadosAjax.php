@@ -14,6 +14,9 @@
 		if($_POST['register']=="Ins"){
 			echo $enunciadosController->insEnunciados();
 		}
+		if($_POST['register']=="Res"){
+			echo $enunciadosController->EvaluarExamen();
+		}
 
 	}
 

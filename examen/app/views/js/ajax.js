@@ -90,21 +90,6 @@ function ajax_alert(alert) {
 		//info     //
 		//question //
 		/////////////
-	}else if (alert.type=="clipboard") {
-		try {
-			await navigator.clipboard.writeText(alert.url);
-			Swal.fire({
-			position: "center-end",
-			icon: "succcess",
-			title: "COPIADO",
-			text: "Link Copiado en el Portapapeles",
-			showConfirmButton: false,
-			confirmButtonColor: "#3085d6",
-			timer: alert.timer*1000
-		});
-		}catch(error){
-			console.log(error);
-		}
 	}else if (alert.type=="msg") {
 		divAlert.innerHTML='<div class="alert alert-'+alert.icon+'" role="alert"><b>'+alert.title+':</b> '+alert.text+'</div>';
 		if (alert.focus) {
