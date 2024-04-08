@@ -17,6 +17,9 @@
 		if($_POST['register']=="Res"){
 			echo $enunciadosController->EvaluarExamen();
 		}
+		if($_POST['register']=="Upd"){
+			echo $enunciadosController->updEnunciado();
+		}
 
 	}
 

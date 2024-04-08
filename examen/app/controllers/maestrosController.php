@@ -188,6 +188,51 @@
 			return json_encode($alert);
 			exit();
 		}
+
+
+		public function updExamen()
+		{
+			$VidExam      =$this->cleanString($_POST['idExam']);
+			$NombreExamen =$this->cleanString($_POST['INombreExamen']);
+
+
+			$fieldsExamen =[ #CAMPOS DE REGISTRO DEL QUERY
+	 	 		[
+					"field_name"  =>"idMaestro",
+					"field_mark"  =>":MidMaestro",
+					"field_value" =>0
+	 	 		],
+	 	 		[
+					"field_name"  =>"NombreExamen",
+					"field_mark"  =>":MNombreExamen",
+					"field_value" =>$NombreExamen
+	 	 		],
+	 	 		[
+					"field_name"  =>"CantEnunExam",
+					"field_mark"  =>":MCantEnunExam",
+					"field_value" =>""
+	 	 		],
+	 	 		[
+					"field_name"  =>"idExam",
+					"field_mark"  =>":MidExam",
+					"field_value" =>$VidExam
+	 	 		]
+	 	 	];
+
+	 	 	$updExam=$this->queSP("SPExamenes","Upd",$fieldsExamen,false);
+
+	 	 	$Link = APP_URL."selExam";
+
+	 	 	$alert=[
+					"type"  =>"redirect",
+					"title"  =>"Guardado",
+					"text" => "Datos GUardados Satisfactoriamente",
+					"icon" =>"success",
+					"url" => $Link
+				];
+			return json_encode($alert);
+			exit();
+		}
 	 	 	
 	}
 

@@ -18,6 +18,9 @@
 		if($_POST['register']=="Sel"){
 			echo $maestrosController->logMaestro();
 		}
+		if($_POST['register']=="Upd"){
+			echo $maestrosController->updExamen();
+		}
 
 
 		

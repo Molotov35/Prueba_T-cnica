@@ -39,13 +39,15 @@
 
 		<?php
 		$cont=0;
-		 for ($i=0; $i <$examList[0]->CantEnunExamen ; $i++) { ?>
+		 for ($i=0; $i <$examList[0]->CantEnunExamen ; $i++) { 
+	  	$j=0;
+		 	?>
 
 
 	  <div class="accordion-item">
 	    <h2 class="accordion-header">
 	      <button class="accordion-button" type="button" data-bs-toggle="collapse"  aria-expanded="true" aria-controls="collapseOne">
-	      	<label for="IEnunciado<?php echo $i;  ?>">
+	      	<label for="flexRadioDefault<?php echo $i.$j?>">
 
 	      		<?php echo $i+1 . ". ".$examList[$cont]->DescripcionEnunciado; ?>
 	      			

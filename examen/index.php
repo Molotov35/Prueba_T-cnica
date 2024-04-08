@@ -13,7 +13,7 @@
  ?>
 
  <!DOCTYPE html>
- <html lang="es" data-bs-theme="light">
+ <html lang="es" data-bs-theme="ligth">
  <head>
  	<?php require_once "app/views/inc/head.php"; ?>
  </head>

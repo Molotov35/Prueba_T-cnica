@@ -33,7 +33,7 @@
 
 <div class="m-5">
 	<div class="accordion" id="accordionExample">
-		<form class="g-3  AjaxForm" method="post" enctype="multipart/form-data" action="<?php echo APP_URL; ?>app/ajax/enunciadosAjax.php" autocomplete="off">
+		<form class="g-3 AjaxForm" method="post" enctype="multipart/form-data" action="<?php echo APP_URL; ?>app/ajax/enunciadosAjax.php" autocomplete="off">
 			<input type="hidden" name="register" value="Upd">
 			<input type="hidden" name="idExam" value="<?php echo $VidExamen; ?>">
 
@@ -46,7 +46,6 @@
 	    <h2 class="accordion-header">
 	      <button class="accordion-button" type="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="collapseOne">
 	      	<label for="IEnunciado<?php echo $i;  ?>"><?php echo $i+1; ?></label>
-	      	<!-- <label for="IEnunciado<?php echo $i;  ?>"><?php echo $i+1; ?></label> -->
 	        <input type="text" name="IEnunciado<?php echo $i;  ?>" id="IEnunciado<?php echo $i;  ?>" class="form-control" value="<?php echo $examList[$cont]->DescripcionEnunciado; ?>">
 	      </button>
 	    </h2>

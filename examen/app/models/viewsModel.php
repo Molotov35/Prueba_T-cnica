@@ -17,7 +17,8 @@
 							"datExam",
 							"enunciados",
 							"Examen",
-							"enunciadosUpd"
+							"enunciadosUpd",
+							"renameExam"
 						];
 
 
