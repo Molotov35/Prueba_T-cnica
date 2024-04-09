@@ -44,23 +44,23 @@
 		 	?>
 
 
-	  <div class="accordion-item">
+	  <div class="accordion-item" >
 	    <h2 class="accordion-header">
-	      <button class="accordion-button" type="button" data-bs-toggle="collapse"  aria-expanded="true" aria-controls="collapseOne">
-	      	<label for="flexRadioDefault<?php echo $i.$j?>">
+	      <button class="w-100 Enunciados" id="Enunciado<?php echo $i; ?>" type="button" data-bs-toggle="collapse"  aria-expanded="true" aria-controls="collapseOne">
+	      	<label class="LblEnunciado" for="flexRadioDefault<?php echo $i.$j?>">
 
 	      		<?php echo $i+1 . ". ".$examList[$cont]->DescripcionEnunciado; ?>
 	      			
 	      		</label>
 	      </button>
 	    </h2>
-	    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+	    <div id="collapseOne" class="" data-bs-parent="#accordionExample">
 	      <div class="accordion-body">
 
 	      	<?php for ($j=0; $j < $CantRespPosi; $j++) { ?>
 
 			    <div class="form-check">
-					  <input class="form-check-input radioCheckRespuesta" type="radio" name="flexRadioDefault<?php echo $i;?>" id="flexRadioDefault<?php echo $i.$j?>" value="<?php echo $examList[$cont]->idRespuesta ?>" checked>
+					  <input class="form-check-input radioCheckRespuesta" type="radio" name="flexRadioDefault<?php echo $i;?>" id="flexRadioDefault<?php echo $i.$j?>" value="<?php echo $examList[$cont]->idRespuesta ?>">
 					  <label type="text" class="" name="inputcheckRespuesta<?php echo $i ?>1" for="flexRadioDefault<?php echo $i.$j?>"><?php echo $examList[$cont]->DescripcionRespuesta; ?></label>
 					</div>
 
@@ -74,7 +74,8 @@
 	  </div>
 		
 		<?php } ?>
-		<button type="submit" class="btn btn-primary mr-5">Evaluar</button>
+		<div id="divAlert"></div>
+		<button type="submit" class="btn btn-primary m-2 ">Evaluar</button>
 	</form>
 	</div>
 </div>

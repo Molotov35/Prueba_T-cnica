@@ -32,7 +32,7 @@ if(!isset($_SESSION["Maestro"]->NombreMaestro) || $_SESSION['Maestro']->NombreMa
   <div class="album py-4 bg-body-tertiary">
     <div class="<?php echo CONFIG_FORM; ?>">
 
-      <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 g-4">
+      <div class="row row-cols-1 row-cols-sm-1 row-cols-md-3 g-4">
         <?php foreach ($examList as $exam) {
           ?>
 

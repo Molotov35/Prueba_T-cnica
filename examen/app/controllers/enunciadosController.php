@@ -156,6 +156,20 @@
 
 			for ($i=0; $i < $CantidadEnunciados; $i++) { 
 				$Input="flexRadioDefault".$i;
+
+				if (!isset($_POST[$Input])) {
+
+					$alert=[
+						"type"  =>"msg",
+						"title" =>"ERROR",
+						"text"  =>"Debe Contestar todas las preguntas",
+						"icon"  =>"danger",
+						"focus" =>"Enunciado".$i
+					];
+					return json_encode($alert);
+					exit();
+				}
+
 				foreach ($Exam as $Respuesta) {
 					if ($Respuesta->idRespuesta==$_POST[$Input] && $Respuesta->CorrectaRespuesta) {
 						$Puntos+=100/$CantidadEnunciados;

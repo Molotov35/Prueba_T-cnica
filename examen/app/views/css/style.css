@@ -56,7 +56,19 @@ input::placeholder{
 .radioCheckRespuesta{
   border: solid black 1px;
 }
-
+.Enunciados{
+  background-color: rgb(208, 217, 225, 1.0);
+  font-size: 25px;
+  border-radius: 5px;
+  border: none;
+}
+.Enunciados:hover{
+  cursor: default;
+}
+.Enunciados:focus{
+  border: solid #FF9595 3px;
+  border-color: #FF9595 solid 1px;
+}
 @media (max-width      : 1400px){
   .navbar-left {
     margin-right: 50%;

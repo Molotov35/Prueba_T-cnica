@@ -55,7 +55,7 @@
 	      	<?php for ($j=0; $j < $CantRespPosi; $j++) { ?>
 
 			    <div class="form-check">
-			    	<input class="form-check-input radioCheckRespuesta" type="radio" name="flexRadioDefault<?php echo $i;?>" id="flexRadioDefault<?php echo $i.$j?>" value="<?php echo $i.$j ?>" checked>
+			    	<input class="form-check-input radioCheckRespuesta" type="radio" name="flexRadioDefault<?php echo $i;?>" id="flexRadioDefault<?php echo $i.$j?>" value="<?php echo $i.$j ?>" <?php echo ($examList[$cont]->CorrectaRespuesta==1)? "checked"   : "" ?>>
 					  <input type="text" class="inputcheckRespuesta" name="inputcheckRespuesta<?php echo $i.$j?>" value="<?php echo $examList[$cont]->DescripcionRespuesta; ?>">
 					</div>
 
